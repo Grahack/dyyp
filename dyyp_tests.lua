@@ -38,6 +38,7 @@ tests[f_name] = tests_tmp
 for f_name, f_tests in pairs(tests) do
     for _, test in ipairs(tests[f_name]) do
         local args_str, expected_str = string.match(test, "(.*) => (.*)")
+        if expected_str == nil then print("Malformed test: "..test) end
         local test_str = f_name..'('..args_str..') == ' .. expected_str
         local test_f, e = load('return '..test_str)
         if test_f == nil then print(e) end
