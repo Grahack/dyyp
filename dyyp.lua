@@ -2,6 +2,9 @@
 
 -- Note: dt comments are doctests
 
+-- Syntactic sugar for note names
+A, B, C, D, E, F, G = "A", "B", "C", "D", "E", "F", "G"
+
 -- Generate notes (constant MIDI nums) as global variables
 -- Cf0, Cb0, Dob0 eval to 11 (English and French names)
 -- C0, Do0 eval to 12
@@ -46,6 +49,7 @@ multi = nil
 
 function note_name_and_oct_to_midi(name, oct)
     --dt 'A', 4 => 69
+    --dt A, 4 => 69
     local f = load('return '..name..oct)
     return f()
 end
