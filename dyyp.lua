@@ -56,3 +56,57 @@ function note_name_and_oct_to_midi(name, oct)
     local f = load('return '..name..oct)
     return f()
 end
+
+function offset_in_circle(pos, len, inc)
+    -- Say we have a circle of numbers from 1 to len,
+    -- what is the new position of pos after an increment of inc?
+    --dt 1, 7, 1 => 2
+    --dt 7, 7, 1 => 1
+    return (pos - 1 + inc) % 7 + 1
+end
+
+function next_name(name)
+    --dt A => B
+    --dt G => A
+    local names = "ABCDEFG"
+    local pos = offset_in_circle(string.find(names, name), 7, 1)
+    return string.sub(names, pos, pos)
+end
+
+function previous_name(name)
+    --dt B => A
+    --dt A => G
+    local names = "ABCDEFG"
+    local pos = offset_in_circle(string.find(names, name), 7, -1)
+    return string.sub(names, pos, pos)
+end
+
+function third_name(name)
+    --dt A => C
+    --dt G => B
+    return next_name(next_name(name))
+end
+
+function fourth_name(name)
+    --dt A => D
+    --dt G => C
+    return next_name(third_name(name))
+end
+
+function seventh_name(name)
+    --dt B => A
+    --dt A => G
+    return previous_name(name)
+end
+
+function sixth_name(name)
+    --dt B => G
+    --dt A => F
+    return previous_name(seventh_name(name))
+end
+
+function fifth_name(name)
+    --dt A => E
+    --dt G => D
+    return previous_name(sixth_name(name))
+end
