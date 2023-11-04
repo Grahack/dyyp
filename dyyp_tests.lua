@@ -45,7 +45,9 @@ for f_name, f_tests in pairs(tests) do
         if not test_f() then
             print(test_str .. ' is false!')
             local the_call = f_name..'('..args_str..')'
-            print('The call returned '..load('return '..the_call)()..'.')
+            local result = load('return '..the_call)()
+            if result == nil then result = "nil" end
+            print('The call returned '..result..'.')
         end
     end
 end
