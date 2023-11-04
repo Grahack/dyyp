@@ -26,9 +26,9 @@ for line in io.lines(main_file) do
         tests_tmp = {}
     end
     -- grab the tests in this function
-    local s = string.match(line, "--dt (.*)")  -- /!\ - is a control char
-    if s ~= nil then
-        tests_tmp[#tests_tmp + 1] = s
+    local pos = string.find(line, doctest_prefix, 1, true)  -- true for plain
+    if pos ~= nil then
+        tests_tmp[#tests_tmp + 1] = string.sub(line, pos + #doctest_prefix)
     end
 end
 -- tests of the last function
