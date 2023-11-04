@@ -1,6 +1,6 @@
 -- DyyP, a Lua library about music theory
 
--- Note: dt comments are doctests
+-- The constants
 
 -- Syntactic sugar for note names
 A, B, C, D, E, F, G = "A", "B", "C", "D", "E", "F", "G"
@@ -46,6 +46,9 @@ do
    -- Last MIDI num is 127 (G9) but here we have some more: Bs9 is 132
 end
 multi = nil
+
+-- The functions
+-- Note: dt comments are doctests
 
 function note_name_and_oct_to_midi(name, oct)
     --dt 'A', 4 => 69
