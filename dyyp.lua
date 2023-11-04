@@ -13,6 +13,7 @@ A, B, C, D, E, F, G = "A", "B", "C", "D", "E", "F", "G"
 -- https://stackoverflow.com/questions/10842679/lua-multiple-assignment
 -- These chars not available in var names: é # ♯ ♭
 function multi(n)
+    -- Utility
     return n, n, n, n, n
 end
 for i = 0, 9, 1 
@@ -49,6 +50,7 @@ multi = nil
 
 -- The functions
 -- Note: dt comments are doctests
+-- Note: "Utility" are non musical functions
 
 function note_name_and_oct_to_midi(name, oct)
     --dt 'A', 4 => 69
@@ -58,6 +60,7 @@ function note_name_and_oct_to_midi(name, oct)
 end
 
 function offset_in_circle(pos, len, inc)
+    -- Utility
     -- Say we have a circle of numbers from 1 to len,
     -- what is the new position of pos after an increment of inc?
     --dt 1, 7, 1 => 2
