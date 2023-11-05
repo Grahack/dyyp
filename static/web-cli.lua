@@ -140,9 +140,9 @@ function input:onkeydown(e)
         and not e.isComposing then
         -- Ctrl+L clears screen like you would expect in a terminal
         output.innerHTML = ""
-        _G.print(_G._COPYRIGHT)
+        -- _G.print(_G._COPYRIGHT)
         return false
     end
 end
 
-_G.print(_G._COPYRIGHT)
+-- _G.print(_G._COPYRIGHT)
