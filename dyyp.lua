@@ -4,6 +4,7 @@
 
 -- Syntactic sugar for note names
 A, B, C, D, E, F, G = "A", "B", "C", "D", "E", "F", "G"
+La, Si, Do, Re, Mi, Fa, Sol = "La", "Si", "Do", "Re", "Mi", "Fa", "Sol"
 
 -- Generate notes (constant MIDI nums) as global variables
 -- Cf0, Cb0, Dob0 eval to 11 (English and French names)
