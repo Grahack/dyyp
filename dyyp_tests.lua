@@ -34,12 +34,22 @@ end
 -- tests of the last function
 tests[f_name] = tests_tmp
 
+local verbose = false  -- may be used to generate documentation
+local verbose_tests = {}
+
 -- parse and check the doc tests
 for f_name, f_tests in pairs(tests) do
+    if verbose and #tests[f_name] > 0 then
+        verbose_tests[#verbose_tests+1] = "- " .. f_name  -- for the TOC
+        verbose_tests[#verbose_tests+1] = f_name
+    end
     for _, test in ipairs(tests[f_name]) do
         local args_str, expected_str = string.match(test, "(.*) => (.*)")
         if expected_str == nil then print("Malformed test: "..test) end
         local test_str = f_name..'('..args_str..') == ' .. expected_str
+        if verbose then
+            verbose_tests[#verbose_tests+1] = test_str
+        end
         local test_f, e = load('return '..test_str)
         if test_f == nil then print(e) end
         if not test_f() then
@@ -50,4 +60,9 @@ for f_name, f_tests in pairs(tests) do
             print('The call returned '..result..'.')
         end
     end
+end
+
+if verbose then
+    table.sort(verbose_tests)
+    show(verbose_tests)
 end
