@@ -15,7 +15,7 @@ La, Si, Do, Re, Mi, Fa, Sol = "La", "Si", "Do", "Re", "Mi", "Fa", "Sol"
 -- These chars not available in var names: é # ♯ ♭
 function multi(n)
     -- Utility
-    return n, n, n, n, n
+    return n, n, n, n, n, n, n
 end
 for i = 0, 9, 1 
 do 
