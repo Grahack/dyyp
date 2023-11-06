@@ -7,6 +7,7 @@
 <body>
     <h1>DyyP</h1>
     <p>Une bibliothèque Lua autour de la théorie musicale</p>
+
     <div class="repl">
         <code id="fengari-console"></code>
         <div class="fengari-input-container">
@@ -15,6 +16,7 @@
                       placeholder="Exemple de code à taper : A4"></textarea>
         </div>
     </div>
+
     <p>Quelques remarques :</p>
     <ul>
         <li>utilisez les flêches du haut et du bas pour naviguer dans
@@ -24,6 +26,27 @@
             entrées ;</li>
         <li><code>Ctrl+L</code> efface la fenêtre des sorties ;</li>
         <li><code>nil</code> signifie « absence de valeur ».</li>
+    </ul>
+
+    <p>Constantes qui correspondent à un nom de note :</p>
+    <ul>
+        <li>A B C D E F G</li>
+        <li>La Si Do Re (sans accent) Mi Fa Sol</li>
+    </ul>
+
+    <p>Constantes représentant une note, dont la valeur est le numéro MIDI
+       correspondant (l’octave va de 0 à 9, A4 vaut par exemple 69,
+       b représente un bémol (notation francophone et anglophone), f et s
+       signifient resp. « flat » et « sharp », d signifie « dièse », bb
+       ou ff double bémol, 2s ou 2d double dièse) :</p>
+    <ul>
+        <li>Ab1 Af1 / A1 / As1 -- Lab1 / La1 / Lad1</li>
+        <li>Bbb1 Bff1 / Bb1 Bf1 / B1 / Bs1 -- Sibb1 / Sib1 / Si1 / Sid1</li>
+        <li>Cb1 Cf1 / C1 / Cs1 / C2s1 -- Dob1 / Do1 / Dod1 / Do2d1</li>
+        <li>Db1 Df1 / D1 / Ds1 -- Reb1 / Re1 / Red1</li>
+        <li>Ebb1 Eff / Eb1 Ef1 / E1 / Es1 -- Mibb1 / Mib1 / Mi1 / Mid1</li>
+        <li>Fb1 Ff1 / F1 / Fs1 / F2s1 -- Fab1 / Fa1 / Fad1 / Fa2d1</li>
+        <li>Gb1 Gf1 / G1 / Gs1 -- Solb1 / Sol1 / Sold1</li>
     </ul>
     <script src="static/highlight.min.js"></script>
     <script src="static/lua.min.js"></script>
