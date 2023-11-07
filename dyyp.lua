@@ -85,6 +85,12 @@ function previous_name(name)
     return string.sub(names, pos, pos)
 end
 
+function second_name(name)
+    --dt A => B
+    --dt G => A
+    return next_name(name)
+end
+
 function third_name(name)
     --dt A => C
     --dt G => B
