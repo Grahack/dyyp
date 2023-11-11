@@ -81,51 +81,88 @@ end
 function next_name(name)
     --dt A => B
     --dt G => A
+    --dt La => Si
+    --dt Sol => La
     local names = "ABCDEFG"
-    local pos = offset_in_circle(string.find(names, name), 7, 1)
-    return string.sub(names, pos, pos)
+    local found = string.find(names, name)
+    if found then
+        local pos = offset_in_circle(found, 7, 1)
+        return string.sub(names, pos, pos)
+    end
+    local names = {Do, Re, Mi, Fa, Sol, La, Si}
+    for i=1, #names do
+        if names[i] == name then
+            local pos = offset_in_circle(i, 7, 1)
+            return names[pos]
+        end
+    end
 end
 
+-- TODO: refactor with previous one
 function previous_name(name)
     --dt B => A
     --dt A => G
+    --dt Si => La
+    --dt La => Sol
     local names = "ABCDEFG"
-    local pos = offset_in_circle(string.find(names, name), 7, -1)
-    return string.sub(names, pos, pos)
+    local found = string.find(names, name)
+    if found then
+        local pos = offset_in_circle(found, 7, -1)
+        return string.sub(names, pos, pos)
+    end
+    local names = {Do, Re, Mi, Fa, Sol, La, Si}
+    for i=1, #names do
+        if names[i] == name then
+            local pos = offset_in_circle(i, 7, -1)
+            return names[pos]
+        end
+    end
 end
 
 function second_name(name)
     --dt A => B
     --dt G => A
+    --dt La => Si
+    --dt Sol => La
     return next_name(name)
 end
 
 function third_name(name)
     --dt A => C
     --dt G => B
+    --dt La => Do
+    --dt Sol => Si
     return next_name(next_name(name))
 end
 
 function fourth_name(name)
     --dt A => D
     --dt G => C
+    --dt La => Re
+    --dt Sol => Do
     return next_name(third_name(name))
 end
 
 function seventh_name(name)
     --dt B => A
     --dt A => G
+    --dt Si => La
+    --dt La => Sol
     return previous_name(name)
 end
 
 function sixth_name(name)
     --dt B => G
     --dt A => F
+    --dt Si => Sol
+    --dt La => Fa
     return previous_name(seventh_name(name))
 end
 
 function fifth_name(name)
     --dt A => E
     --dt G => D
+    --dt La => Mi
+    --dt Sol => Re
     return previous_name(sixth_name(name))
 end
