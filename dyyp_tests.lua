@@ -7,6 +7,34 @@ function show(tbl)
         print(v)
     end
 end
+
+function table_tostring(tbl)
+    local r = '{'
+    for i=1, #tbl do
+        r = r .. tbl[i]
+        if i ~= #tbl then
+            r = r .. ','
+        end
+    end
+    r = r .. '}'
+    return r
+end
+
+-- compares strings, numbers and tables which are arrays
+function compare(a, b)
+    if type(a) == 'number' and type(b) == 'number' then return a == b end
+    if type(a) == 'string' and type(b) == 'string' then return a == b end
+    if type(a) == 'table' and type(b) == 'table' then
+        if #a ~= #b then return false
+        else
+            for i=1, #a do
+                if a[i] ~= b[i] then return false end
+            end
+        end
+        return true
+    end
+    return false
+end
 -- end of utils
 
 -- grab the relevant lines: they begin with "--dt"
@@ -46,17 +74,20 @@ for f_name, f_tests in pairs(tests) do
     for _, test in ipairs(tests[f_name]) do
         local args_str, expected_str = string.match(test, "(.*) => (.*)")
         if expected_str == nil then print("Malformed test: "..test) end
-        local test_str = f_name..'('..args_str..') == ' .. expected_str
+        local A_str = f_name..'('..args_str..')'
+        local B_str = expected_str
+        local test_str = 'compare(' .. A_str .. ', ' .. B_str .. ')'
         if verbose then
             verbose_tests[#verbose_tests+1] = test_str
         end
         local test_f, e = load('return '..test_str)
         if test_f == nil then print(e) end
         if not test_f() then
-            print(test_str .. ' is false!')
+            print(A_str .. ' == ' .. B_str .. ' is false!')
             local the_call = f_name..'('..args_str..')'
             local result = load('return '..the_call)()
             if result == nil then result = "nil" end
+            if type(result) == 'table' then result = table_tostring(result) end
             print('The call returned '..result..'.')
         end
     end
