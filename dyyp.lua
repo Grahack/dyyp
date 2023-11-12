@@ -62,11 +62,43 @@ multi = nil
 -- Note: dt comments are doctests
 -- Note: "Utility" are non musical functions
 
-function note_name_and_oct_to_midi(name, oct)
-    --dt 'A', 4 => 69
-    --dt A, 4 => 69
-    local f = load('return '..name..oct)
-    return f()
+function MIDI_diff(name1, name2)
+    -- Returns numbers between -6 and 6, see the tests.
+    -- Nothing has been done for deciding between -6 or 6, but anyway it
+    -- should only be used for small intervals (< 6 semitones).
+    -- Only handle note names without octave specification!
+    -- If you have the octave just use the minus sign: A5-A4 => 12.
+    --dt B , C => -1
+    --dt C , B =>  1
+    --dt A,  G =>  2
+    --dt A,  A =>  0
+    --dt As, A =>  1
+    --dt Ab, A => -1
+    return (_G[name1..0] - _G[name2..0] + 6) % 12 - 6
+end
+
+function name_and_alteration(name)
+    --dt A  => A, 0
+    --dt Ab => A, -1
+    --dt As => A, 1
+    --dt La  => La, 0
+    --dt Lab => La, -1
+    --dt Lad => La, 1
+    local c = string.sub(name, 1, 1)
+    -- First and only letter is enough to identify the name
+    if string.find("ABCEG", c) then return c, MIDI_diff(name, c) end
+    -- First letter is enough to identify the name
+    if string.find("LMR", c) then
+        if c == 'L' then return La, MIDI_diff(name, La) end
+        if c == 'M' then return Mi, MIDI_diff(name, Mi) end
+        if c == 'R' then return Re, MIDI_diff(name, Re) end
+    end
+    if name == D   then return D,   MIDI_diff(name, D) end
+    if name == Do  then return Do,  MIDI_diff(name, Do) end
+    if name == F   then return F,   MIDI_diff(name, F) end
+    if name == Fa  then return Fa,  MIDI_diff(name, Fa) end
+    if name == Si  then return Si,  MIDI_diff(name, Si) end
+    if name == Sol then return Sol, MIDI_diff(name, Sol) end
 end
 
 function offset_in_circle(pos, len, inc)

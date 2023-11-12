@@ -67,18 +67,29 @@
     <h2>Fonctions</h2>
 
 <pre>
+MIDI_diff
+MIDI_diff(A,  A) =>  0
+MIDI_diff(A,  G) =>  2
+MIDI_diff(Ab, A) => -1
+MIDI_diff(As, A) =>  1
+MIDI_diff(B , C) => -1
+MIDI_diff(C , B) =>  1
 fifth_name
 fifth_name(A) => E
 fifth_name(G) => D
 fourth_name
 fourth_name(A) => D
 fourth_name(G) => C
+name_and_alteration
+name_and_alteration(A ) => A, 0
+name_and_alteration(Ab) => A, -1
+name_and_alteration(As) => A, 1
+name_and_alteration(La ) => La, 0
+name_and_alteration(Lab) => La, -1
+name_and_alteration(Lad) => La, 1
 next_name
 next_name(A) => B
 next_name(G) => A
-note_name_and_oct_to_midi
-note_name_and_oct_to_midi('A', 4) == 69
-note_name_and_oct_to_midi(A, 4) == 69
 offset_in_circle
 offset_in_circle(1, 7, 1) => 2
 offset_in_circle(7, 7, 1) => 1
