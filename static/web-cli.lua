@@ -82,6 +82,18 @@ local function doREPL()
     if fn then
         local results = pack(xpcall(fn, traceback))
         if results[1] then
+            -- hack for dyyp
+            if type(results[2]) == 'table' then
+                local tbl = results[2]
+                local r = '{'
+                for i=1, #tbl do
+                    r = r .. tbl[i]
+                    if i ~= #tbl then r = r .. ', ' end
+                end
+                r = r .. '}'
+                results[2] = r
+            end
+            -- end of hack
             if results.n > 1 then
                 _G.print(unpack(results, 2, results.n))
             end
