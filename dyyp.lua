@@ -228,16 +228,16 @@ end
 function name_to_note_name(name_with_alteration)
     --dt Do => Do
     --dt C  => Do
-    --dt Dod => Do
-    --dt Cs  => Do
-    local name = name_and_alteration(name_with_alteration)
+    --dt Dod => Dod
+    --dt Cs  => Dod
+    local name, alt = name_and_alteration(name_with_alteration)
     local names = {en = {A, B, C, D, E, F, G},
                    fr = {La, Si, Do, Re, Mi, Fa, Sol}}
     local search_in
     if #name > 1 then search_in = names.fr else search_in = names.en end
     local output_from = names[LANG_NOTE_NAMES]
     for i=1, #search_in do
-        if search_in[i] == name then return output_from[i] end
+        if search_in[i] == name then return output_from[i]..alt_string(alt) end
     end
 end
 
