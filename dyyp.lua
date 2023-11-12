@@ -225,9 +225,12 @@ function fifth_name(name)
     return previous_name(sixth_name(name))
 end
 
-function name_to_note_name(name)
+function name_to_note_name(name_with_alteration)
     --dt Do => Do
     --dt C  => Do
+    --dt Dod => Do
+    --dt Cs  => Do
+    local name = name_and_alteration(name_with_alteration)
     local names = {en = {A, B, C, D, E, F, G},
                    fr = {La, Si, Do, Re, Mi, Fa, Sol}}
     local search_in
