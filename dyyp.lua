@@ -2,6 +2,11 @@
 
 -- The constants
 
+-- Some configuration (the default one should be used for the tests)
+LANG_NOTE_NAMES  = 'fr'  -- en is A B C, fr is Do Re Mi
+LANG_FLATS_STYLE = 'b'   -- for English note names only, can be b or f
+LANG_CHORD_NAMES = 'en'  -- if empty use LANG_NOTE_NAMES
+
 -- Syntactic sugar for note names
 A, B, C, D, E, F, G = "A", "B", "C", "D", "E", "F", "G"
 Ab, Bb, Cb, Db, Eb, Fb, Gb = "Ab", "Bb", "Cb", "Db", "Eb", "Fb", "Gb"
@@ -218,4 +223,45 @@ function fifth_name(name)
     --dt La => Mi
     --dt Sol => Re
     return previous_name(sixth_name(name))
+end
+
+function name_to_note_name(name)
+    --dt Do => Do
+    --dt C  => Do
+    local names = {en = {A, B, C, D, E, F, G},
+                   fr = {La, Si, Do, Re, Mi, Fa, Sol}}
+    local search_in
+    if #name > 1 then search_in = names.fr else search_in = names.en end
+    local output_from = names[LANG_NOTE_NAMES]
+    for i=1, #search_in do
+        if search_in[i] == name then return output_from[i] end
+    end
+end
+
+-- just jump of one note name, up or down
+function chromatic_jump(name, jump)
+    --dt Do,  2 => Re
+    --dt Do,  1 => Reb
+    --dt Mi,  1 => Fa
+    --dt Mi,  2 => Fad
+    --dt Do, -1 => Si
+    --dt Do, -2 => Sib
+    --dt  C,  2 => Re
+    --dt Eb,  2 => Fa
+    local nn, na = name_and_alteration(name)
+    local tmp_name
+    if jump > 0 then
+        tmp_name = next_name(name)
+    else
+        tmp_name = previous_name(name)
+    end
+    local new_name = name_to_note_name(tmp_name)
+    local d = MIDI_diff(new_name, name) - jump
+    local flat = LANG_FLATS_STYLE
+    local sharp = (LANG_NOTE_NAMES == 'fr') and 'd' or 's'
+    if     d ==  2 then return new_name..flat..flat
+    elseif d ==  1 then return new_name..flat
+    elseif d ==  0 then return new_name
+    elseif d == -1 then return new_name..sharp
+    elseif d == -2 then return new_name..'2'..sharp end
 end

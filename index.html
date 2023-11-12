@@ -66,6 +66,16 @@
 
     <h2>Fonctions</h2>
 
+    <p>Certains tests dépendent de la configuration par défaut :</p>
+<ul>
+    <li><code>LANG_NOTE_NAMES  = 'fr'</code>
+        «en» pour A B C, «fr» pour Do Re Mi</li>
+    <li><code>LANG_FLATS_STYLE = 'b' </code>
+        seulement valable pour les notes en anglais, b ou f</li>
+    <li><code>LANG_CHORD_NAMES = 'en'</code>
+        si vide, le système utilise <code>LANG_NOTE_NAMES</code></li>
+</ul>
+
 <pre>
 MIDI_diff
 MIDI_diff(A,  A) =>  0
@@ -74,6 +84,14 @@ MIDI_diff(Ab, A) => -1
 MIDI_diff(As, A) =>  1
 MIDI_diff(B , C) => -1
 MIDI_diff(C , B) =>  1
+chromatic_jump
+chromatic_jump( C,  2) => Re
+chromatic_jump(Do,  1) => Reb
+chromatic_jump(Do,  2) => Re
+chromatic_jump(Do, -1) => Si
+chromatic_jump(Do, -2) => Sib
+chromatic_jump(Mi,  1) => Fa
+chromatic_jump(Mi,  2) => Fad
 fifth_name
 fifth_name(A) => E
 fifth_name(G) => D
@@ -91,6 +109,9 @@ name_and_alteration(As) => A, 1
 name_and_alteration(La ) => La, 0
 name_and_alteration(Lab) => La, -1
 name_and_alteration(Lad) => La, 1
+name_to_note_name
+name_to_note_name(C ) => Do
+name_to_note_name(Do) => Do
 next_name
 next_name(A) => B
 next_name(Ab) => B
