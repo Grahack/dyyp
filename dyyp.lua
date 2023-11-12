@@ -84,6 +84,7 @@ function name_and_alteration(name)
     --dt La  => La, 0
     --dt Lab => La, -1
     --dt Lad => La, 1
+    --dt Sib => Si, -1
     local c = string.sub(name, 1, 1)
     -- First and only letter is enough to identify the name
     if string.find("ABCEG", c) then return c, MIDI_diff(name, c) end
@@ -93,12 +94,14 @@ function name_and_alteration(name)
         if c == 'M' then return Mi, MIDI_diff(name, Mi) end
         if c == 'R' then return Re, MIDI_diff(name, Re) end
     end
-    if name == D   then return D,   MIDI_diff(name, D) end
-    if name == Do  then return Do,  MIDI_diff(name, Do) end
-    if name == F   then return F,   MIDI_diff(name, F) end
-    if name == Fa  then return Fa,  MIDI_diff(name, Fa) end
-    if name == Si  then return Si,  MIDI_diff(name, Si) end
-    if name == Sol then return Sol, MIDI_diff(name, Sol) end
+    -- Now we need two letters
+    local prefix = string.sub(name, 1, 2)
+    if prefix ==  Do  then return Do,  MIDI_diff(name, Do) end
+    if      c ==  D   then return D,   MIDI_diff(name, D) end
+    if prefix ==  Fa  then return Fa,  MIDI_diff(name, Fa) end
+    if      c ==  F   then return F,   MIDI_diff(name, F) end
+    if prefix ==  Si  then return Si,  MIDI_diff(name, Si) end
+    if prefix == 'So' then return Sol, MIDI_diff(name, Sol) end
 end
 
 function offset_in_circle(pos, len, inc)
