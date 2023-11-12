@@ -265,3 +265,42 @@ function chromatic_jump(name, jump)
     elseif d == -1 then return new_name..sharp
     elseif d == -2 then return new_name..'2'..sharp end
 end
+
+function mode(tona, tona_type)
+    --dt  0, "M"  => {Do, Re, Mi , Fa, Sol, La , Si}
+    --dt -3, "m"  => {Do, Re, Mib, Fa, Sol, Lab, Sib}
+    --dt -3, "mh" => {Do, Re, Mib, Fa, Sol, Lab, Si}
+    --dt -3, "mm" => {Do, Re, Mib, Fa, Sol, La , Si}
+
+    -- modes schemes
+    local schemes = { M = {2, 2, 1, 2, 2, 2},
+                      m = {2, 1, 2, 2, 1, 2},
+                     mh = {2, 1, 2, 2, 1, 3},
+                     mm = {2, 1, 2, 2, 2, 2}}
+    -- Indices go like 1, 2, 3, ... -3, -2, -1.
+    -- I thought it worked for tables but it's only for strings,
+    -- hence this trick:
+    if tona < 0 then tona = 12 + tona + 1 end
+
+    local fondas = { M = {G, D,  A,  E,  B, Fs, Gb, Db, Ab, Eb, Bb, F},
+                     m = {E, B, Fs, Cs, Gs, Ds, Eb, Bb,  F,  C,  G, D},
+                    mh = {E, B, Fs, Cs, Gs, Ds, Eb, Bb,  F,  C,  G, D},
+                    mm = {E, B, Fs, Cs, Gs, Ds, Eb, Bb,  F,  C,  G, D}}
+    -- Lua starting to count at 1 we need this:
+    fondas['M' ][0] = C
+    fondas['m' ][0] = A
+    fondas['mh'][0] = A
+    fondas['mm'][0] = A
+
+    -- let's begin with the first note
+    local first_note = name_to_note_name(fondas[tona_type][tona])
+    local note_names = {first_note}
+    -- then add the other notes
+    local scheme = schemes[tona_type]
+    for i=1, #scheme do
+        local last_note = note_names[#note_names]
+        note_names[#note_names + 1] = chromatic_jump(last_note, scheme[i])
+    end
+
+    return note_names
+end
