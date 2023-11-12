@@ -241,10 +241,12 @@ function name_to_note_name(name_with_alteration)
     end
 end
 
-function alt_string(alt)
+function alt_string(alt, lang)
     -- Utility
+    -- If lang is not provided it defaults to LANG_NOTE_NAMES
+    lang = lang or LANG_NOTE_NAMES
     local flat = LANG_FLATS_STYLE
-    local sharp = (LANG_NOTE_NAMES == 'fr') and 'd' or 's'
+    local sharp = (lang == 'fr') and 'd' or 's'
     if     alt == -2 then return flat..flat
     elseif alt == -1 then return flat
     elseif alt ==  0 then return ''
