@@ -242,6 +242,19 @@ function note_name_to_chord_name(name_with_alteration)
     end
 end
 
+function alt_string(alt, lang)
+    -- Utility
+    -- If lang is not provided it defaults to LANG_NOTE_NAMES
+    lang = lang or LANG_NOTE_NAMES
+    local flat = LANG_FLATS_STYLE
+    local sharp = (lang == 'fr') and 'd' or 's'
+    if     alt == -2 then return flat..flat
+    elseif alt == -1 then return flat
+    elseif alt ==  0 then return ''
+    elseif alt ==  1 then return sharp
+    elseif alt ==  2 then return '2'..sharp end
+end
+
 function name_to_note_name(name_with_alteration)
     --dt Do => Do
     --dt C  => Do
@@ -256,19 +269,6 @@ function name_to_note_name(name_with_alteration)
     for i=1, #search_in do
         if search_in[i] == name then return output_from[i]..alt_string(alt) end
     end
-end
-
-function alt_string(alt, lang)
-    -- Utility
-    -- If lang is not provided it defaults to LANG_NOTE_NAMES
-    lang = lang or LANG_NOTE_NAMES
-    local flat = LANG_FLATS_STYLE
-    local sharp = (lang == 'fr') and 'd' or 's'
-    if     alt == -2 then return flat..flat
-    elseif alt == -1 then return flat
-    elseif alt ==  0 then return ''
-    elseif alt ==  1 then return sharp
-    elseif alt ==  2 then return '2'..sharp end
 end
 
 -- just jump of one note name, up or down
