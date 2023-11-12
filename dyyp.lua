@@ -225,6 +225,23 @@ function fifth_name(name)
     return previous_name(sixth_name(name))
 end
 
+function note_name_to_chord_name(name_with_alteration)
+    --dt Do => C
+    --dt Re => D
+    --dt Dod => Cs
+    --dt Red => Ds
+    local name, alt = name_and_alteration(name_with_alteration)
+    local names = {en = {A, B, C, D, E, F, G},
+                   fr = {La, Si, Do, Re, Mi, Fa, Sol}}
+    local search_in = names[LANG_NOTE_NAMES]
+    local output_from = names[LANG_CHORD_NAMES]
+    for i=1, #search_in do
+        if search_in[i] == name then
+            return output_from[i]..alt_string(alt, LANG_CHORD_NAMES)
+        end
+    end
+end
+
 function name_to_note_name(name_with_alteration)
     --dt Do => Do
     --dt C  => Do
