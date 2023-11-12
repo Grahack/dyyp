@@ -280,7 +280,7 @@ function mode(tona, tona_type)
     --dt -3, "mh" => {Do, Re, Mib, Fa, Sol, Lab, Si}
     --dt -3, "mm" => {Do, Re, Mib, Fa, Sol, La , Si}
     --dt  3, "m"  => {Fad, Sold, La, Si, Dod, Re, Mi}
-
+    if tona < -6 or tona > 6 then return nil end
     -- modes schemes
     local schemes = { M = {2, 2, 1, 2, 2, 2},
                       m = {2, 1, 2, 2, 1, 2},
