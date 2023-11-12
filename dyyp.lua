@@ -241,6 +241,17 @@ function name_to_note_name(name_with_alteration)
     end
 end
 
+function alt_string(alt)
+    -- Utility
+    local flat = LANG_FLATS_STYLE
+    local sharp = (LANG_NOTE_NAMES == 'fr') and 'd' or 's'
+    if     alt == -2 then return flat..flat
+    elseif alt == -1 then return flat
+    elseif alt ==  0 then return ''
+    elseif alt ==  1 then return sharp
+    elseif alt ==  2 then return '2'..sharp end
+end
+
 -- just jump of one note name, up or down
 function chromatic_jump(name, jump)
     --dt Do,  2 => Re
@@ -259,14 +270,8 @@ function chromatic_jump(name, jump)
         tmp_name = previous_name(name)
     end
     local new_name = name_to_note_name(tmp_name)
-    local d = MIDI_diff(new_name, name) - jump
-    local flat = LANG_FLATS_STYLE
-    local sharp = (LANG_NOTE_NAMES == 'fr') and 'd' or 's'
-    if     d ==  2 then return new_name..flat..flat
-    elseif d ==  1 then return new_name..flat
-    elseif d ==  0 then return new_name
-    elseif d == -1 then return new_name..sharp
-    elseif d == -2 then return new_name..'2'..sharp end
+    local d = jump - MIDI_diff(new_name, name)
+    return new_name .. alt_string(d)
 end
 
 function mode(tona, tona_type)
