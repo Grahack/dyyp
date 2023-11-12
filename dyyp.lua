@@ -113,11 +113,20 @@ function offset_in_circle(pos, len, inc)
     return (pos - 1 + inc) % 7 + 1
 end
 
-function next_name(name)
+function next_name(name_with_alteration)
     --dt A => B
     --dt G => A
     --dt La => Si
     --dt Sol => La
+    --dt Ab => B
+    --dt Gb => A
+    --dt Lab => Si
+    --dt Solb => La
+    --dt As => B
+    --dt Gs => A
+    --dt Lad => Si
+    --dt Sold => La
+    local name = name_and_alteration(name_with_alteration)
     local names = "ABCDEFG"
     local found = string.find(names, name)
     if found then
@@ -134,11 +143,20 @@ function next_name(name)
 end
 
 -- TODO: refactor with previous one
-function previous_name(name)
+function previous_name(name_with_alteration)
     --dt B => A
     --dt A => G
     --dt Si => La
     --dt La => Sol
+    --dt Bb => A
+    --dt Ab => G
+    --dt Sib => La
+    --dt Lab => Sol
+    --dt Bs => A
+    --dt As => G
+    --dt Sid => La
+    --dt Lad => Sol
+    local name = name_and_alteration(name_with_alteration)
     local names = "ABCDEFG"
     local found = string.find(names, name)
     if found then

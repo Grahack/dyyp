@@ -77,9 +77,13 @@ MIDI_diff(C , B) =>  1
 fifth_name
 fifth_name(A) => E
 fifth_name(G) => D
+fifth_name(La) => Mi
+fifth_name(Sol) => Re
 fourth_name
 fourth_name(A) => D
 fourth_name(G) => C
+fourth_name(La) => Re
+fourth_name(Sol) => Do
 name_and_alteration
 name_and_alteration(A ) => A, 0
 name_and_alteration(Ab) => A, -1
@@ -89,25 +93,55 @@ name_and_alteration(Lab) => La, -1
 name_and_alteration(Lad) => La, 1
 next_name
 next_name(A) => B
+next_name(Ab) => B
+next_name(As) => B
 next_name(G) => A
+next_name(Gb) => A
+next_name(Gs) => A
+next_name(La) => Si
+next_name(Lab) => Si
+next_name(Lad) => Si
+next_name(Sol) => La
+next_name(Solb) => La
+next_name(Sold) => La
 offset_in_circle
 offset_in_circle(1, 7, 1) => 2
 offset_in_circle(7, 7, 1) => 1
 previous_name
 previous_name(A) => G
+previous_name(Ab) => G
+previous_name(As) => G
 previous_name(B) => A
+previous_name(Bb) => A
+previous_name(Bs) => A
+previous_name(La) => Sol
+previous_name(Lab) => Sol
+previous_name(Lad) => Sol
+previous_name(Si) => La
+previous_name(Sib) => La
+previous_name(Sid) => La
 second_name
 second_name(A) => B
 second_name(G) => A
+second_name(La) => Si
+second_name(Sol) => La
 seventh_name
 seventh_name(A) => G
 seventh_name(B) => A
+seventh_name(La) => Sol
+seventh_name(Si) => La
 sixth_name
 sixth_name(A) => F
 sixth_name(B) => G
+sixth_name(La) => Fa
+sixth_name(Si) => Sol
 third_name
 third_name(A) => C
 third_name(G) => B
+third_name(La) => Do
+third_name(Sol) => Si
+third_name(La) => Do
+third_name(Sol) => Si
 </pre>
 
     <script src="static/highlight.min.js"></script>
