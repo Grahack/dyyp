@@ -12,9 +12,7 @@ function table_tostring(tbl)
     local r = '{'
     for i=1, #tbl do
         r = r .. tbl[i]
-        if i ~= #tbl then
-            r = r .. ','
-        end
+        if i ~= #tbl then r = r .. ', ' end
     end
     r = r .. '}'
     return r
