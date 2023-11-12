@@ -279,6 +279,7 @@ function mode(tona, tona_type)
     --dt -3, "m"  => {Do, Re, Mib, Fa, Sol, Lab, Sib}
     --dt -3, "mh" => {Do, Re, Mib, Fa, Sol, Lab, Si}
     --dt -3, "mm" => {Do, Re, Mib, Fa, Sol, La , Si}
+    --dt  3, "m"  => {Fad, Sold, La, Si, Dod, Re, Mi}
 
     -- modes schemes
     local schemes = { M = {2, 2, 1, 2, 2, 2},
