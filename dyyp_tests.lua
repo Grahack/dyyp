@@ -78,7 +78,7 @@ for f_name, f_tests in pairs(tests) do
         local B_str = expected_str
         local test_str = 'compare(' .. A_str .. ', ' .. B_str .. ')'
         if verbose then
-            verbose_tests[#verbose_tests+1] = test_str
+            verbose_tests[#verbose_tests+1] = A_str .. ' => ' .. B_str
         end
         local test_f, e = load('return '..test_str)
         if test_f == nil then print(e) end
