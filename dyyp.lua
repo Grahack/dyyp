@@ -67,6 +67,21 @@ multi = nil
 -- Note: dt comments are doctests
 -- Note: "Utility" are non musical functions
 
+function show(val)
+    if type(val) == 'table' then
+        local tbl = val
+        local r = '{'
+        for i=1, #tbl do
+            r = r .. tbl[i]
+            if i ~= #tbl then r = r .. ', ' end
+        end
+        r = r .. '}'
+        print(r)
+    else
+        print(val)
+    end
+end
+
 function MIDI_diff(name1, name2)
     -- Returns numbers between -6 and 6, see the tests.
     -- Nothing has been done for deciding between -6 or 6, but anyway it

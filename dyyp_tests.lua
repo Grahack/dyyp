@@ -2,12 +2,6 @@ local main_file = 'dyyp.lua'
 dofile(main_file)
 
 -- utils
-function show(tbl)
-    for _, v in ipairs(tbl) do
-        print(v)
-    end
-end
-
 function table_tostring(tbl)
     local r = '{'
     for i=1, #tbl do
