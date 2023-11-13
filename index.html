@@ -184,6 +184,121 @@ third_name(La) => Do
 third_name(Sol) => Si
 </pre>
 
+    <h2>Exemples de calculs</h2>
+
+<pre>
+→ for i=-6, 6 do print(i) show(mode(i, "M")) end
+-6
+{Solb, Lab, Sib, Dob, Reb, Mib, Fa}
+-5
+{Reb, Mib, Fa, Solb, Lab, Sib, Do}
+-4
+{Lab, Sib, Do, Reb, Mib, Fa, Sol}
+-3
+{Mib, Fa, Sol, Lab, Sib, Do, Re}
+-2
+{Sib, Do, Re, Mib, Fa, Sol, La}
+-1
+{Fa, Sol, La, Sib, Do, Re, Mi}
+0
+{Do, Re, Mi, Fa, Sol, La, Si}
+1
+{Sol, La, Si, Do, Re, Mi, Fad}
+2
+{Re, Mi, Fad, Sol, La, Si, Dod}
+3
+{La, Si, Dod, Re, Mi, Fad, Sold}
+4
+{Mi, Fad, Sold, La, Si, Dod, Red}
+5
+{Si, Dod, Red, Mi, Fad, Sold, Lad}
+6
+{Fad, Sold, Lad, Si, Dod, Red, Mid}
+
+→ for i=-6, 6 do print(i) show(mode(i, "m")) end
+-6
+{Mib, Fa, Solb, Lab, Sib, Dob, Reb}
+-5
+{Sib, Do, Reb, Mib, Fa, Solb, Lab}
+-4
+{Fa, Sol, Lab, Sib, Do, Reb, Mib}
+-3
+{Do, Re, Mib, Fa, Sol, Lab, Sib}
+-2
+{Sol, La, Sib, Do, Re, Mib, Fa}
+-1
+{Re, Mi, Fa, Sol, La, Sib, Do}
+0
+{La, Si, Do, Re, Mi, Fa, Sol}
+1
+{Mi, Fad, Sol, La, Si, Do, Re}
+2
+{Si, Dod, Re, Mi, Fad, Sol, La}
+3
+{Fad, Sold, La, Si, Dod, Re, Mi}
+4
+{Dod, Red, Mi, Fad, Sold, La, Si}
+5
+{Sold, Lad, Si, Dod, Red, Mi, Fad}
+6
+{Red, Mid, Fad, Sold, Lad, Si, Dod}
+
+→ for i=-6, 6 do print(i) show(mode(i, "mh")) end
+-6
+{Mib, Fa, Solb, Lab, Sib, Dob, Re}
+-5
+{Sib, Do, Reb, Mib, Fa, Solb, La}
+-4
+{Fa, Sol, Lab, Sib, Do, Reb, Mi}
+-3
+{Do, Re, Mib, Fa, Sol, Lab, Si}
+-2
+{Sol, La, Sib, Do, Re, Mib, Fad}
+-1
+{Re, Mi, Fa, Sol, La, Sib, Dod}
+0
+{La, Si, Do, Re, Mi, Fa, Sold}
+1
+{Mi, Fad, Sol, La, Si, Do, Red}
+2
+{Si, Dod, Re, Mi, Fad, Sol, Lad}
+3
+{Fad, Sold, La, Si, Dod, Re, Mid}
+4
+{Dod, Red, Mi, Fad, Sold, La, Sid}
+5
+{Sold, Lad, Si, Dod, Red, Mi, Fa2d}
+6
+{Red, Mid, Fad, Sold, Lad, Si, Do2d}
+
+→ for i=-6, 6 do print(i) show(mode(i, "mm")) end
+-6
+{Mib, Fa, Solb, Lab, Sib, Do, Re}
+-5
+{Sib, Do, Reb, Mib, Fa, Sol, La}
+-4
+{Fa, Sol, Lab, Sib, Do, Re, Mi}
+-3
+{Do, Re, Mib, Fa, Sol, La, Si}
+-2
+{Sol, La, Sib, Do, Re, Mi, Fad}
+-1
+{Re, Mi, Fa, Sol, La, Si, Dod}
+0
+{La, Si, Do, Re, Mi, Fad, Sold}
+1
+{Mi, Fad, Sol, La, Si, Dod, Red}
+2
+{Si, Dod, Re, Mi, Fad, Sold, Lad}
+3
+{Fad, Sold, La, Si, Dod, Red, Mid}
+4
+{Dod, Red, Mi, Fad, Sold, Lad, Sid}
+5
+{Sold, Lad, Si, Dod, Red, Mid, Fa2d}
+6
+{Red, Mid, Fad, Sold, Lad, Sid, Do2d}
+</pre>
     <script src="static/highlight.min.js"></script>
     <script src="static/lua.min.js"></script>
     <script src="static/fengari-web.js" type="text/javascript"></script>
