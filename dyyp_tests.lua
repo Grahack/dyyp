@@ -89,5 +89,7 @@ end
 
 if verbose then
     table.sort(verbose_tests)
-    show(verbose_tests)
+    for _, v in ipairs(verbose_tests) do
+        print(v)
+    end
 end
