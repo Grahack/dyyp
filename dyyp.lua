@@ -272,9 +272,9 @@ end
 
 function name_to_note_name(name_with_alteration)
     --dt Do => Do
-    --dt C  => Do
+    --dt  C => Do
     --dt Dod => Dod
-    --dt Cs  => Dod
+    --dt  Cs => Dod
     local name, alt = name_and_alteration(name_with_alteration)
     local names = {en = {A, B, C, D, E, F, G},
                    fr = {La, Si, Do, Re, Mi, Fa, Sol}}
