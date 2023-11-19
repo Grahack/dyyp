@@ -83,6 +83,7 @@ d’autres commentaires (en anglais) figurent dans le
 <a href="https://github.com/Grahack/dyyp/blob/main/dyyp.lua">code source</a>.</p>
 
 <pre>
+Deg(1) + Deg(3, -1) => Deg(3, -1)
 MIDI_diff
 MIDI_diff(A,  A) =>  0
 MIDI_diff(A,  G) =>  2
@@ -96,6 +97,7 @@ chromatic_jump(Do,  1) => Reb
 chromatic_jump(Do,  2) => Re
 chromatic_jump(Do, -1) => Si
 chromatic_jump(Do, -2) => Sib
+chromatic_jump(Eb,  2) => Fa
 chromatic_jump(Mi,  1) => Fa
 chromatic_jump(Mi,  2) => Fad
 fifth_name
@@ -110,10 +112,10 @@ fourth_name(La) => Re
 fourth_name(Sol) => Do
 mode
 mode( 0, "M" ) => {Do, Re, Mi , Fa, Sol, La , Si}
+mode( 3, "m" ) => {Fad, Sold, La, Si, Dod, Re, Mi}
 mode(-3, "m" ) => {Do, Re, Mib, Fa, Sol, Lab, Sib}
 mode(-3, "mh") => {Do, Re, Mib, Fa, Sol, Lab, Si}
 mode(-3, "mm") => {Do, Re, Mib, Fa, Sol, La , Si}
-mode( 3, "m" ) => {Fad, Sold, La, Si, Dod, Re, Mi}
 name_and_alteration
 name_and_alteration(A ) => A, 0
 name_and_alteration(Ab) => A, -1
@@ -121,6 +123,7 @@ name_and_alteration(As) => A, 1
 name_and_alteration(La ) => La, 0
 name_and_alteration(Lab) => La, -1
 name_and_alteration(Lad) => La, 1
+name_and_alteration(Sib) => Si, -1
 name_to_note_name
 name_to_note_name(C ) => Do
 name_to_note_name(Cs) => Dod
@@ -178,8 +181,6 @@ sixth_name(Si) => Sol
 third_name
 third_name(A) => C
 third_name(G) => B
-third_name(La) => Do
-third_name(Sol) => Si
 third_name(La) => Do
 third_name(Sol) => Si
 </pre>
