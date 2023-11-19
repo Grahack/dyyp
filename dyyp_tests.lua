@@ -3,6 +3,8 @@ dofile(main_file)
 
 -- utils
 function table_tostring(tbl)
+    local ts = tostring(tbl)
+    if string.sub(ts, 1, 5) ~= 'table' then return ts end
     local r = '{'
     for i=1, #tbl do
         r = r .. tbl[i]
