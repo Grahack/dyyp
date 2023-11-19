@@ -21,7 +21,7 @@ function compare(a, b)
     if type(a) == 'table' and type(b) == 'table' then
         if #a ~= #b then return false
         else
-            for i=1, #a do
+            for i, _ in pairs(a) do
                 if a[i] ~= b[i] then return false end
             end
         end
