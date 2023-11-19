@@ -68,7 +68,8 @@ for f_name, f_tests in pairs(tests) do
     for _, test in ipairs(tests[f_name]) do
         local args_str, expected_str = string.match(test, "(.*) => (.*)")
         if expected_str == nil then print("Malformed test: "..test) end
-        local A_str = f_name..'('..args_str..')'
+        local trimmed_args_str = string.gsub(args_str, "^(.-)%s*$", "%1")
+        local A_str = f_name..'('..trimmed_args_str..')'
         local B_str = expected_str
         local test_str = 'compare(' .. A_str .. ', ' .. B_str .. ')'
         if verbose then
