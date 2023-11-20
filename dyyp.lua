@@ -82,6 +82,13 @@ function show(val)
     end
 end
 
+function class()
+    -- Utility
+    return setmetatable({},
+             {__call = function (cls, ...) return cls.new(...) end,
+              __index = function (t, k) return t.methods[k] end})
+end
+
 function MIDI_diff(name1, name2)
     -- Returns numbers between -6 and 6, see the tests.
     -- Nothing has been done for deciding between -6 or 6, but anyway it
@@ -354,23 +361,23 @@ end
 -- Construct them with `Deg(d)` where `d` is a number between 1 and 7,
 -- or `Deg(d, a)` where `a` is the alteration (-1, 0 or 1, defaults to 0).
 
-Deg = {}
-function Deg.new(d, a)
-    assert(d > 0, "first arg d must be positive")
-    assert(a == nil or (-1 <= a and a <= 1), "second arg a must be -1, 0 or 1")
-    local o = {deg=d,       -- usually a number between 1 and 7, or more
-               alt=a or 0}  -- -1, 0 or 1, 0 by default
-    local self = setmetatable(o, getmetatable(Deg))
-    return self
-end
-setmetatable(Deg, {
-    __call = function (cls, ...) return cls.new(...) end,
-    __tostring = function (t) return "Deg("..t.deg..", "..t.alt..")" end,
-    __eq = function (t1, t2) return (t1.deg == t2.deg)
-                                    and (t1.alt == t2.alt) end,
-    __add = function (t1, t2) return Deg(t1.deg + t2.deg - 1,
-                                            t1.alt + t2.alt) end,
-})
+Deg = class()
+Deg.methods = {
+    new = function (d, a)
+        local o = {deg=d,       -- usually a number between 1 and 7, or more
+                   alt=a or 0}  -- -1, 0 or 1, 0 by default
+        assert(d > 0, "first arg d must be positive")
+        assert(a == nil or (-1 <= a and a <= 1),
+               "second arg a must be -1, 0 or 1")
+        local self = setmetatable(o, Deg.methods)
+        return self end,
+    __tostring = function (t)
+        return "Deg("..t.deg..", "..t.alt..")" end,
+    __eq = function (t1, t2)
+        return (t1.deg == t2.deg) and (t1.alt == t2.alt) end,
+    __add = function (t1, t2)
+        return Deg(t1.deg + t2.deg - 1, t1.alt + t2.alt) end,
+}
 
 function _id(o)
     --dt Deg(1) + Deg(3, -1) => Deg(3, -1)
