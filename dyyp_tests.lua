@@ -33,18 +33,20 @@ end
 
 -- grab the relevant lines: they begin with "--dt"
 -- organise them in a table, keys being the names of the functions
-local f_name = nil
-local tests = {}
+local name = nil
+local all_tests = {}
 local tests_tmp = {}
 local doctest_prefix = '--dt '
 for line in io.lines(main_file) do
     -- try to grab a function name
     local s = string.match(line, "function ([^(]*)")
+    -- or a class name
+    if s == nil then s = string.match(line, "([^(]*) = class") end
     if s ~= nil then
-        if f_name ~= nil then
-            tests[f_name] = tests_tmp
+        if name ~= nil then
+            all_tests[name] = tests_tmp
         end
-        f_name = s
+        name = s
         tests_tmp = {}
     end
     -- grab the tests in this function
@@ -54,36 +56,59 @@ for line in io.lines(main_file) do
     end
 end
 -- tests of the last function
-tests[f_name] = tests_tmp
+all_tests[name] = tests_tmp
 
 local verbose = false  -- may be used to generate documentation
 local verbose_tests = {}
 
 -- parse and check the doc tests
-for f_name, f_tests in pairs(tests) do
-    if verbose and #tests[f_name] > 0 then
-        verbose_tests[#verbose_tests+1] = "- " .. f_name  -- for the TOC
-        verbose_tests[#verbose_tests+1] = f_name
+for name, tests in pairs(all_tests) do
+    local test_type
+    if string.find("ABCDE", string.sub(name, 1, 1)) then
+        test_type = "object"
+    else
+        test_type = "function"
     end
-    for _, test in ipairs(tests[f_name]) do
+    if verbose and #all_tests[name] > 0 then
+        verbose_tests[#verbose_tests+1] = "- " .. name  -- for the TOC
+        verbose_tests[#verbose_tests+1] = name
+    end
+    for _, test in ipairs(all_tests[name]) do
         local args_str, expected_str = string.match(test, "(.*) => (.*)")
         if expected_str == nil then print("Malformed test: "..test) end
         local trimmed_args_str = string.gsub(args_str, "^(.-)%s*$", "%1")
-        local A_str = f_name..'('..trimmed_args_str..')'
+        local A_str
+        if test_type == 'object' then
+            A_str = trimmed_args_str
+        end
+        if test_type == 'function' then
+            A_str = name..'('..trimmed_args_str..')'
+        end
         local B_str = expected_str
         local test_str = 'compare(' .. A_str .. ', ' .. B_str .. ')'
         if verbose then
-            verbose_tests[#verbose_tests+1] = A_str .. ' => ' .. B_str
+            if test_type == 'object' then
+                table.insert(verbose_tests, name..': '..A_str..' => '.. B_str)
+            end
+            if test_type == 'function' then
+                table.insert(verbose_tests, A_str..' => '.. B_str)
+            end
         end
         local test_f, e = load('return '..test_str)
         if test_f == nil then print(e) end
         if not test_f() then
             print(A_str .. ' == ' .. B_str .. ' is false!')
-            local the_call = f_name..'('..args_str..')'
-            local result = load('return '..the_call)()
+            local the_expr
+            if test_type == 'object' then
+                the_expr = trimmed_args_str
+            end
+            if test_type == 'function' then
+                the_expr = name..'('..trimmed_args_str..')'
+            end
+            local result = load('return '..the_expr)()
             if result == nil then result = "nil" end
             if type(result) == 'table' then result = table_tostring(result) end
-            print('The call returned '..result..'.')
+            print('The expr returned '..result..'.')
         end
     end
 end
