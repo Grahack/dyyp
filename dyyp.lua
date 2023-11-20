@@ -71,6 +71,7 @@ multi = nil
 -- Note: "Utility" are non musical functions
 
 function show(val)
+    -- Utility
     if type(val) == 'table' then
         local tbl = val
         local r = '{'
