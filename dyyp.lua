@@ -2,6 +2,9 @@
 
 -- The constants
 
+-- Constant degrees are defined further in the file (we needed `Deg`):
+-- I, II, bII, III, bIII, IV, V, bV, VI, bVI, VII, bVII
+
 -- Some configuration (the default one should be used for the tests)
 LANG_NOTE_NAMES  = 'fr'  -- en is A B C, fr is Do Re Mi
 LANG_FLATS_STYLE = 'b'   -- for English note names only, can be b or f
@@ -362,6 +365,10 @@ end
 -- or `Deg(d, a)` where `a` is the alteration (-1, 0 or 1, defaults to 0).
 
 Deg = class()
+--dt I => Deg(1)
+--dt Deg(1) + Deg(3, -1) => Deg(3, -1)
+--dt II + Deg(2) => Deg(3)
+
 Deg.methods = {
     new = function (d, a)
         local o = {deg=d,       -- usually a number between 1 and 7, or more
@@ -379,12 +386,11 @@ Deg.methods = {
         return Deg(t1.deg + t2.deg - 1, t1.alt + t2.alt) end,
 }
 
-function _id(o)
-    --dt Deg(1) + Deg(3, -1) => Deg(3, -1)
-   return o
-end
+  I = Deg(1)
+ II,  bII = Deg(2), Deg(2, -1)
+III, bIII = Deg(3), Deg(3, -1)
+ IV = Deg(4)
+  V, bV   = Deg(5), Deg(5, -1)
+ VI, bVI  = Deg(6), Deg(6, -1)
+VII, bVII = Deg(7), Deg(7, -1)
 
-function _id_tostring(o)
-    --dt Deg(1) + Deg(3, -1) => "Deg(3, -1)"
-   return tostring(o)
-end
