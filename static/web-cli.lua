@@ -83,11 +83,16 @@ local function doREPL()
         local results = pack(xpcall(fn, traceback))
         if results[1] then
             -- hack for dyyp
-            if type(results[2]) == 'table' then show(results[2]) end
-            -- end of hack
-            if results.n > 1 then
-                _G.print(unpack(results, 2, results.n))
+            local val = results[2]
+            local mt = getmetatable(val)
+            if mt and mt.__tostring ~= nil then
+                _G.print(tostring(val))
+            elseif type(val) == 'table' then
+                show(val)
+            else
+                _G.print(val)
             end
+            -- end of hack
         else
             _G.print(results[2])
         end
