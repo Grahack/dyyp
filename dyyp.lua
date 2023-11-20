@@ -366,8 +366,10 @@ end
 
 Deg = class()
 --dt I => Deg(1)
+--dt tostring(I) => "I"
 --dt Deg(1) + Deg(3, -1) => Deg(3, -1)
 --dt II + Deg(2) => Deg(3)
+--dt tostring(Deg(1) + Deg(3, -1)) => "bIII"
 
 Deg.methods = {
     new = function (d, a)
@@ -379,7 +381,11 @@ Deg.methods = {
         local self = setmetatable(o, Deg.methods)
         return self end,
     __tostring = function (t)
-        return "Deg("..t.deg..", "..t.alt..")" end,
+        local a = ''
+        if t.alt == -1 then a = 'b' end
+        if t.alt ==  1 then a = '#' end
+        local roman = {'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'}
+        return a .. roman[t.deg] end,
     __eq = function (t1, t2)
         return (t1.deg == t2.deg) and (t1.alt == t2.alt) end,
     __add = function (t1, t2)
