@@ -89,7 +89,7 @@ function class()
               __index = function (t, k) return t.methods[k] end})
 end
 
-function MIDI_diff(name1, name2)
+function midi_diff(name1, name2)
     -- Returns numbers between -6 and 6, see the tests.
     -- Nothing has been done for deciding between -6 or 6, but anyway it
     -- should only be used for small intervals (< 6 semitones).
@@ -114,21 +114,21 @@ function name_and_alteration(name)
     --dt Sib => Si, -1
     local c = string.sub(name, 1, 1)
     -- First and only letter is enough to identify the name
-    if string.find("ABCEG", c) then return c, MIDI_diff(name, c) end
+    if string.find("ABCEG", c) then return c, midi_diff(name, c) end
     -- First letter is enough to identify the name
     if string.find("LMR", c) then
-        if c == 'L' then return La, MIDI_diff(name, La) end
-        if c == 'M' then return Mi, MIDI_diff(name, Mi) end
-        if c == 'R' then return Re, MIDI_diff(name, Re) end
+        if c == 'L' then return La, midi_diff(name, La) end
+        if c == 'M' then return Mi, midi_diff(name, Mi) end
+        if c == 'R' then return Re, midi_diff(name, Re) end
     end
     -- Now we need two letters
     local prefix = string.sub(name, 1, 2)
-    if prefix ==  Do  then return Do,  MIDI_diff(name, Do) end
-    if      c ==  D   then return D,   MIDI_diff(name, D) end
-    if prefix ==  Fa  then return Fa,  MIDI_diff(name, Fa) end
-    if      c ==  F   then return F,   MIDI_diff(name, F) end
-    if prefix ==  Si  then return Si,  MIDI_diff(name, Si) end
-    if prefix == 'So' then return Sol, MIDI_diff(name, Sol) end
+    if prefix ==  Do  then return Do,  midi_diff(name, Do) end
+    if      c ==  D   then return D,   midi_diff(name, D) end
+    if prefix ==  Fa  then return Fa,  midi_diff(name, Fa) end
+    if      c ==  F   then return F,   midi_diff(name, F) end
+    if prefix ==  Si  then return Si,  midi_diff(name, Si) end
+    if prefix == 'So' then return Sol, midi_diff(name, Sol) end
 end
 
 function offset_in_circle(pos, len, inc)
@@ -311,7 +311,7 @@ function chromatic_jump(name, jump)
         tmp_name = previous_name(name)
     end
     local new_name = name_to_note_name(tmp_name)
-    local d = jump - MIDI_diff(new_name, name)
+    local d = jump - midi_diff(new_name, name)
     return new_name .. alt_string(d)
 end
 

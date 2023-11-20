@@ -84,13 +84,6 @@ d’autres commentaires (en anglais) figurent dans le
 
 <pre>
 Deg(1) + Deg(3, -1) => Deg(3, -1)
-MIDI_diff
-MIDI_diff(A,  A) =>  0
-MIDI_diff(A,  G) =>  2
-MIDI_diff(Ab, A) => -1
-MIDI_diff(As, A) =>  1
-MIDI_diff(B , C) => -1
-MIDI_diff(C , B) =>  1
 chromatic_jump
 chromatic_jump( C,  2) => Re
 chromatic_jump(Do,  1) => Reb
@@ -110,6 +103,13 @@ fourth_name(A) => D
 fourth_name(G) => C
 fourth_name(La) => Re
 fourth_name(Sol) => Do
+midi_diff
+midi_diff(A,  A) =>  0
+midi_diff(A,  G) =>  2
+midi_diff(Ab, A) => -1
+midi_diff(As, A) =>  1
+midi_diff(B , C) => -1
+midi_diff(C , B) =>  1
 mode
 mode( 0, "M" ) => {Do, Re, Mi , Fa, Sol, La , Si}
 mode( 3, "m" ) => {Fad, Sold, La, Si, Dod, Re, Mi}
